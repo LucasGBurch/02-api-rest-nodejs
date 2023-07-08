@@ -1,0 +1,18 @@
+O init (npm init -y) do node não tem instalação dop TypeScript, por isso instalamos manualmente como dependência de Desenvolvimento:
+
+```npm i -D typescript```
+
+E o tsconfig dele:
+
+```npx tsc --init```
+
+E modificarmos dentro desse tsconfig.json o target na linha 14. É a versão de JS pra qual vamos converter nosso código:
+
+es2016 -> ES2020
+
+Para converter o código do arquivo ts para js e depois rodá-lo com node:
+
+```npx tsc src/index.ts```
+```node src/index.js```
+
+Claro, não fazemos isso o tempo todo. Temos FERRAMENTAS DE CONVERSÃO:
