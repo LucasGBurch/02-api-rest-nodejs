@@ -1,4 +1,4 @@
-O init (npm init -y) do node não tem instalação dop TypeScript, por isso instalamos manualmente como dependência de Desenvolvimento:
+1) O init (npm init -y) do node não tem instalação dop TypeScript, por isso instalamos manualmente como dependência de Desenvolvimento:
 
 ```npm i -D typescript```
 
@@ -15,4 +15,24 @@ Para converter o código do arquivo ts para js e depois rodá-lo com node:
 ```npx tsc src/index.ts```
 ```node src/index.js```
 
-Claro, não fazemos isso o tempo todo. Temos FERRAMENTAS DE CONVERSÃO:
+Claro, não fazemos isso o tempo todo. Temos FERRAMENTAS DE CONVERSÃO.
+
+2) Framework Base do projeto: Fastify
+
+```npm i fastify```
+
+Como o node não foi construído com TS, precisamos também instalar o pacote do @types/node:
+
+```npm install -D @types/node```
+
+para que funcione o ```npx tsc src/server.ts```
+
+E executemos o server: ```node src/server.js```
+
+É claro que isso é automatizado através do tsx:
+
+```npm install tsx -D``` e o comando:
+
+```npx tsx src/server.ts``` sem necessidade de criar o arquivo js. Porém, só em desenvolvimento fazemos tudo isso. Por isso o -D. Em produção, ocorre a conversão em .js e tudo feito anteriormente, porque rodar o js é muito mais rápido/performático.
+
+De qualquer forma, colocamos no script com tsx watch para monitorar mudanças também.
