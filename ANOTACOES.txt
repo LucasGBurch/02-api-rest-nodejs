@@ -36,3 +36,10 @@ E executemos o server: ```node src/server.js```
 ```npx tsx src/server.ts``` sem necessidade de criar o arquivo js. Porém, só em desenvolvimento fazemos tudo isso. Por isso o -D. Em produção, ocorre a conversão em .js e tudo feito anteriormente, porque rodar o js é muito mais rápido/performático.
 
 De qualquer forma, colocamos no script com tsx watch para monitorar mudanças também.
+
+
+3) ESTRATÉGIA DE ACESSO AO BANCO DE DADOS DESTE MÓDULO:
+
+QUERY BUILDERS - Basicamente, fazem comandos de SQL utilizando a linguagem de JavaScript. Exemplo https://knexjs.org/guide/query-builder.html#where
+
+Configuração - 
