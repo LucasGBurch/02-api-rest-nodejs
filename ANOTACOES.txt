@@ -42,4 +42,10 @@ De qualquer forma, colocamos no script com tsx watch para monitorar mudanças ta
 
 QUERY BUILDERS - Basicamente, fazem comandos de SQL utilizando a linguagem de JavaScript. Exemplo https://knexjs.org/guide/query-builder.html#where
 
-Configuração - 
+Configuração - npm install knex sqlite3
+
+sqlite3 é uma das opções para DB, no caso a que usaremos com o Knex
+
+"sqlite_schema" é uma tabela criada automaticamente no knex, mesmo que na ausência de tabela retorne só um array vazio;
+
+A pasta tmp é de temporary, onde fica o banco de dados criado localmente. Ela vai para o .gitignore pois não faz parte da prática subir o banco no projeto.
