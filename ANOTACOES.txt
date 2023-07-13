@@ -49,3 +49,14 @@ sqlite3 é uma das opções para DB, no caso a que usaremos com o Knex
 "sqlite_schema" é uma tabela criada automaticamente no knex, mesmo que na ausência de tabela retorne só um array vazio;
 
 A pasta tmp é de temporary, onde fica o banco de dados criado localmente. Ela vai para o .gitignore pois não faz parte da prática subir o banco no projeto.
+
+4) Migration - "npx knex -h" (de help) mostra todos os comandos que podemos executar do knex. Dentre eles, os migrate. Usaremos o migrate e criaremos uma nova tabela chamada documents:
+
+"npx knex migrate:make create-documents", mas criando antes um knexfile para ele saber da existência do database. Nele, apensar importamos e exportamos a config que utilizamos no database.
+
+Outro passo necessário para evitar os erros é ajustar a parte de typescript, pois o knex não suporta o tsx que estamos usando no projeto. Por isso, criamos um novo script chamado knex, com um comando de leitura do tsx via node; ele é direcionado ao knexfile para fazer a leitura para nós. Daí executamos o script separando o -h para ser entendido como do knex em vez do npm:
+
+"npm run knex -- -h" e depois, finalmente, o migrate:
+
+"npm run knex -- migrate:make create-documents"
+Também adicionamos configurações em database através da interface Knex: Knex.Config
