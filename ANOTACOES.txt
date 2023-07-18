@@ -74,3 +74,33 @@ Adicionadas mudanças, criamos de novo a tabela. Depois, há um comando que faz 
 "npm run knex -- migrate:make add-session-id-to-transactions"
 
 E editamos seus up e down e rodamos o :latest novamente: "npm run knex -- migrate:latest"
+
+
+6) Exemplos de queries feitos lá no server.ts:
+
+app.get('/hello', async () => {
+  // const tables = await knex('sqlite_schema').select('*');
+  // return tables; Experimentando outras operações:
+
+  // // Inserção:
+  // const transactions = await knex('transactions')
+  //   .insert({
+  //     id: crypto.randomUUID(),
+  //     title: 'Transação de teste',
+  //     amount: 1000,
+  //   })
+  //   .returning('*'); // Returning faz a rota retornar os dados da transação, e não só um [1]
+
+  // Busca/select:
+  const transactions = await knex('transactions')
+    .where('amount', 1000)
+    .select('*'); // Só o select * seleciona todos na busca
+  return transactions;
+});
+
+7) Trabalhar com variáveis de ambiente:
+
+Instalar extensão DotENV, para ler esses arquivos.
+Instalar a dependência: npm i dotenv
+
+Depois importamos no database.ts o dotenv/config, que lerá automaticamente o arquivo .env que criamos e vai expor todos os valores que temos nele através da variável global process.env (dar console pra testar)
