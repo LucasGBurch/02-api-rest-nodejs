@@ -104,3 +104,21 @@ Instalar extensão DotENV, para ler esses arquivos.
 Instalar a dependência: npm i dotenv
 
 Depois importamos no database.ts o dotenv/config, que lerá automaticamente o arquivo .env que criamos e vai expor todos os valores que temos nele através da variável global process.env (dar console pra testar)
+
+8) Pontuando Requisitos da Aplicação (Normalmente realizado com um README.md):
+
+Requisitos Funcionais (RF):
+
+- [ ] O usuário deve poder criar uma nova transação;
+- [ ] O usuário deve poder obter um resumo da sua conta;
+- [ ] O usuário deve poder listas todas as transações que já ocorreram;
+- [ ] O usuário deve poder visualizar uma transação única;
+
+Regras de Negócio (RN):
+
+- [ ] A transação pode ser do tipo crédito que somará ao valor total, ou débito que subtrairá;
+- [ ] Deve ser possível identificarmos o usuário entre as requisições;
+- [ ] O usuário só pode visualizar transações o qual ele criou;
+
+Requisitos Não-Funcionais (RNF):
+- [ ]
