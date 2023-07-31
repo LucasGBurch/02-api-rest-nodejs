@@ -5,6 +5,24 @@ import { knex } from '../database';
 
 // Todo o plugin precisa ser uma função assíncrona!
 export async function transactionRoutes(app: FastifyInstance) {
+  app.get('/', async () => {
+    const transactions = await knex('transactions').select('*'); // Sem asterisco, vazio, ele entende tb
+
+    return { transactions }
+  });
+
+  app.get('/:id', async (request) => {
+    const getTransactionsParamsSchema = z.object({
+      id: z.string().uuid(),
+    })
+
+    const { id } = getTransactionsParamsSchema.parse(request.params);
+
+    const transaction = await knex('transactions').where('id', id).first(); // Primeiro com id
+
+    return { transaction }
+  })
+
   app.post('/', async (request, reply) => {
     // Prefix no server já define o transactions depois da barra
 
