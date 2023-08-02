@@ -2,29 +2,52 @@ import { FastifyInstance } from 'fastify';
 import z from 'zod';
 import { randomUUID } from 'node:crypto';
 import { knex } from '../database';
+import { checkSessionIdExists } from '../middlewares/check-session-id-exists';
 
 // Todo o plugin precisa ser uma função assíncrona!
 export async function transactionRoutes(app: FastifyInstance) {
-  app.get('/', async () => {
-    const transactions = await knex('transactions').select('*'); // Sem asterisco, vazio, ele entende tb
+  app.get('/', {
+    preHandler: [checkSessionIdExists],
+  }, async (request, reply) => {
+    const { sessionId } = request.cookies;
+
+    const transactions = await knex('transactions')
+      .where('session_id', sessionId)
+      .select('*'); // Sem asterisco, vazio, ele entende tb
 
     return { transactions };
   });
 
-  app.get('/:id', async (request) => {
+  app.get('/:id', {
+    preHandler: [checkSessionIdExists],
+  }, async (request) => {
     const getTransactionsParamsSchema = z.object({
       id: z.string().uuid(),
     });
 
     const { id } = getTransactionsParamsSchema.parse(request.params);
 
-    const transaction = await knex('transactions').where('id', id).first(); // Primeiro com id
+    const { sessionId } = request.cookies;
+
+    const transaction = await knex('transactions')
+      .where({
+        session_id: sessionId, // cookie
+        id, // id da consulta
+      })
+      .first(); // Primeiro com id
 
     return { transaction };
   });
 
-  app.get('/summary', async () => {
-    const summary = await knex('transactions').sum('amount', { as: 'amount' }).first(); // first() para entender que o retorno é um só; não um array
+  app.get('/summary', {
+    preHandler: [checkSessionIdExists],
+  }, async (request) => {
+    const { sessionId } = request.cookies;
+
+    const summary = await knex('transactions')
+      .where('session_id', sessionId) // cookie
+      .sum('amount', { as: 'amount' })
+      .first(); // first() para entender que o retorno é um só; não um array
 
     return { summary };
   });
