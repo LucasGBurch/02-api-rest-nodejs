@@ -129,3 +129,12 @@ Requisitos Não-Funcionais (RNF):
 Faremos cookies no fastify também. Para que o usuário só possa visualizar as transações que ele criou ao logar:
 
 "npm i @fastify/cookie" e mudanças no início do server.ts e antes de inserção de dados nas transactions;
+
+
+10) Testando hook global no início das transactionsRoutes:
+
+app.addHook('preHandler', async (request, reply
+  ) => {
+    console.log(`[${request.method}] ${request.url}`);
+    // log para testar os métodos disparando eles no insomnia; apesar de ser um middleware global, ele vale somente pra este contexto das transactionRoutes. Dá pra botar lá no server antes das rotas para funcionar em toda a aplicação, mas nessa aplicação não terá utilidade. Por isso deixei aqui nas anotações.
+  });
