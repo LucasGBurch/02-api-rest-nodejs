@@ -138,3 +138,13 @@ app.addHook('preHandler', async (request, reply
     console.log(`[${request.method}] ${request.url}`);
     // log para testar os métodos disparando eles no insomnia; apesar de ser um middleware global, ele vale somente pra este contexto das transactionRoutes. Dá pra botar lá no server antes das rotas para funcionar em toda a aplicação, mas nessa aplicação não terá utilidade. Por isso deixei aqui nas anotações.
   });
+
+
+  11) Criação de primeiro teste com o Vitest, em vez do tradicional Jest.
+
+  Por baixo dos panos, o Vitest usa o esbuild. É um bundler para aplicações em typescript; ele converte o tsx em js de maneira menos lenta que o Jest, que precisa de outras ferramentas para isso, como o Babel. O Vitest também é totalmente compatível com o Jest, porque o código é igual:
+
+  npm i vitest -D
+
+  Execução de testes dos arquivos: npx vitest
+  npm test depois de ter nos scripts o "vitest"
