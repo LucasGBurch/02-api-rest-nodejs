@@ -1,9 +1,23 @@
-import { expect, test } from 'vitest';
+import { expect, test, beforeAll, afterAll } from 'vitest';
+import request from 'supertest';
+import { app } from '../src/app';
 
-test('o usuário consegue criar uma nova transação', () => {
-  // fazer a chamada HTTP p/ criar uma nova transação
+beforeAll(async () => {
+  await app.ready(); // O teste dava 404 not found na resposta por não esperar o app estar pronto. Este beforeAll corrige isso. Ele espera o Fastify terminar de cadastrar os plugins
+});
 
-  const responseStatusCode = 201;
-
-  expect(responseStatusCode).toEqual(201)
+afterAll(async () => {
+  await app.close(); // É importante fechar a aplicação também.
 })
+
+test('user can create a new transaction', async () => {
+  await request(app.server)
+    .post('/transactions')
+    .send({
+      title: 'New transaction',
+      amount: 5000,
+      type: 'credit',
+    })
+    .expect(201);
+  // como se fosse expect(response.statusCode).toEqual(201), com response armazenando essa chamada do await
+});

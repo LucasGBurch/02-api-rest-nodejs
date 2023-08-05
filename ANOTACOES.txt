@@ -148,3 +148,13 @@ app.addHook('preHandler', async (request, reply
 
   Execução de testes dos arquivos: npx vitest
   npm test depois de ter nos scripts o "vitest"
+
+
+  12) Para testes de criação de transações, onde precisamos subir um servidor no arquivo de teste com o app, a gente utiliza a ferramenta supertest:
+
+  npm i supertest -D
+  Com o complemento para TS: npm i -D @types/supertest
+
+  Isso porque não convém subir uma porta só para realização de testes; pode dar problema.
+
+  Criamos o app de novo num arquivo app.ts, mas, ao contrário do server.ts, nós não fazemos o listen. Por isso utilizamos esse app, que não precisa subir um servidor, para realizar os testes.
