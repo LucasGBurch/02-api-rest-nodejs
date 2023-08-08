@@ -158,3 +158,8 @@ app.addHook('preHandler', async (request, reply
   Isso porque não convém subir uma porta só para realização de testes; pode dar problema.
 
   Criamos o app de novo num arquivo app.ts, mas, ao contrário do server.ts, nós não fazemos o listen. Por isso utilizamos esse app, que não precisa subir um servidor, para realizar os testes.
+
+
+  13) Para completar o ciclo de testes, precisamos evitar que dados sejam criados para o banco através dos testes. É por isso que é importante criarmos um banco PARA OS TESTES. Ou seja, um banco de dados zerado e sem interferência externa. Isso envolve fazer toda aquela parte dos .env, mas versão só para testes, além de mudanças no intex.ts da pasta env. Só que sem necessidade do NODE_ENV nas variáveis de ambiente, porque o Vitest já preenche automaticamente.
+
+  Para o novo banco de dados test.db, foi necessário também, dentro dos testes e antes de cada um, um comando para rodar as migrations. Desse modo, teremos a tabela transactions para o banco de dados de teste também. Por isso que testes do tipo e2e (end to end) precisam ser poucos e bons. Porque essas operações tomam bastante tempo para executar.

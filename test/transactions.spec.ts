@@ -1,4 +1,5 @@
-import { it, beforeAll, afterAll, describe, expect } from 'vitest';
+import { it, beforeAll, afterAll, describe, expect, beforeEach } from 'vitest';
+import { execSync } from 'node:child_process';
 import request from 'supertest';
 import { app } from '../src/app';
 
@@ -9,6 +10,12 @@ describe('Transactions routes', () => {
 
   afterAll(async () => {
     await app.close(); // É importante fechar a aplicação também.
+  });
+
+  // beforeEach é mais adequado para rodar a migration, em vez de beforeAll, porque o banco de dados precisa estar zerado para CADA UM DOS TESTES. Para isso, executamos um "rollback --all" antes do latest, para zerar os testes. Isso custa cada vez mais tempo a cada vez que os testes rodam, o que explica por que testes e2e precisam ser poucos e bons. Esses comandos de terminal são executados em código aqui graças ao execSync.
+  beforeEach(() => {
+    execSync('npm run knex migrate:rollback --all');
+    execSync('npm run knex migrate:latest');
   });
 
   it('should be able to create a new transaction', async () => {
