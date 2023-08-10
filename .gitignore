@@ -7,15 +7,21 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
-db/app.db
-db/test.db
+
+# Database (* inclui tudo dentro da pasta no formato .db)
+db/*.db
+
+# Env
 .env
 .env.test
 
+# Build
 dist
 dist-ssr
 *.local
+build
 
 # Editor directories and files
 .vscode/*

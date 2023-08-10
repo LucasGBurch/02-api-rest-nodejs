@@ -163,3 +163,19 @@ app.addHook('preHandler', async (request, reply
   13) Para completar o ciclo de testes, precisamos evitar que dados sejam criados para o banco através dos testes. É por isso que é importante criarmos um banco PARA OS TESTES. Ou seja, um banco de dados zerado e sem interferência externa. Isso envolve fazer toda aquela parte dos .env, mas versão só para testes, além de mudanças no intex.ts da pasta env. Só que sem necessidade do NODE_ENV nas variáveis de ambiente, porque o Vitest já preenche automaticamente.
 
   Para o novo banco de dados test.db, foi necessário também, dentro dos testes e antes de cada um, um comando para rodar as migrations. Desse modo, teremos a tabela transactions para o banco de dados de teste também. Por isso que testes do tipo e2e (end to end) precisam ser poucos e bons. Porque essas operações tomam bastante tempo para executar.
+
+
+  14) Preparando o deploy da aplicação:
+  Deploy com serviço gerenciado, mais simplificado que uma AWS, Azure e afins. Como as plataformas de deploy não entendem TypeScript, começamos convertendo o código em JS.
+
+  Compilaríamos o código ao ativar o "rootDir" para "./src" e "outDir": "./build", e depois rodamos "npx tsc" (apesar de 4 erros). Problema é que o tsc cria uns js indesejados (knexfile.js, arquivo de teste.js), além de ser muito lento.
+  
+  Existem ferramentas melhores para usarmos. Então, comentamos novamente as linhas e instalamos a ferramenta:
+
+  "npm i tsup -D"
+
+  Ele usa o esbuild por baixo dos panos, o que acelera o trabalho com código TS. Utilizando o script npm run build ("tsup src", com "--out-dir build" para que a pasta se chame build), ele gera rapidamente uma pasta dist.
+
+  E rodamos o servidor com "node build/server.js", para garantir que ele rode com node puro.
+
+  Para terminar, o Diego sobe no GitHub a aplicação, o que aqui não é preciso pois já fizemos. Mas, em termos de comandos terminal para GitHub, essa penúltima aula também é interessante
