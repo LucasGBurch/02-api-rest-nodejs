@@ -178,4 +178,9 @@ app.addHook('preHandler', async (request, reply
 
   E rodamos o servidor com "node build/server.js", para garantir que ele rode com node puro.
 
-  Para terminar, o Diego sobe no GitHub a aplicação, o que aqui não é preciso pois já fizemos. Mas, em termos de comandos terminal para GitHub, essa penúltima aula também é interessante
+  Para terminar, o Diego sobe no GitHub a aplicação, o que aqui não é preciso pois já fizemos. Mas, em termos de comandos terminal para GitHub, essa penúltima aula também é interessante.
+
+
+  15) Para deploy no Render, instalamos o Postgres, além das outras modificações neste commit:
+
+  "npm i pg"

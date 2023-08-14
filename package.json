@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Segundo projeto da trilha node js. Com API Rest utilizando Fastify (melhor que o express) e TypeScript)",
   "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "knex": "node --no-warnings --loader tsx ./node_modules/knex/bin/cli.js --knexfile ./knexfile.ts",
@@ -20,14 +23,15 @@
     "tsup": "^7.2.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6",
-    "vitest": "^0.34.1"
+    "vitest": "^0.34.1",
+    "sqlite3": "^5.1.6"
   },
   "dependencies": {
     "@fastify/cookie": "^9.0.1",
     "dotenv": "^16.3.1",
     "fastify": "^4.19.2",
     "knex": "^2.5.0",
-    "sqlite3": "^5.1.6",
+    "pg": "^8.11.2",
     "zod": "^3.21.4"
   }
 }
